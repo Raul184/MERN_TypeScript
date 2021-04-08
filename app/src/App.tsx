@@ -1,7 +1,8 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
-import Users from './components/users';
+import Home from './pages/Home';
 
 const client = new ApolloClient({
   uri: "http://localhost:4000",
@@ -11,9 +12,9 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <Users />
-      </div>
+      <Switch>
+        <Route exact path='/' component={Home} />
+      </Switch>
     </ApolloProvider>
   );
 }
