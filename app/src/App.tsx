@@ -4,6 +4,7 @@ import { setContext } from 'apollo-link-context';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
+import SignUp from './pages/SignUp';
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
 const authLink = setContext(
@@ -28,6 +29,7 @@ function App() {
     <ApolloProvider client={client}>
       <Switch>
         <Route exact path='/' component={Home} />
+        <Route exact path='/signup' component={SignUp} />
       </Switch>
     </ApolloProvider>
   );

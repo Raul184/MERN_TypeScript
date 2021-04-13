@@ -1,24 +1,45 @@
 import { gql, useMutation } from '@apollo/client';
-import React from 'react'
+import { useHistory } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import React from 'react'
 import * as Yup from 'yup';
-import { history } from 'react-router-dom';
 
 
-const SIGNUP_MUTATIONS = gql`
+const SIGNUP_MUTATION = gql`
   mutation signup($name: String, $email: String!, $password: String!){
     signup(name: $name, email: $email, password: $password){
       token
     }
   }
 `
+interface SignupValues {
+  name: string,
+  email: string,
+  password: string,
+  confirmPassword: string
+}
 
 export default function SignUp() {
-  const { loading, error, token } = useMutation(SIGNUP_MUTATIONS)
-  if (loading) {
-    return <p>Loading...</p>
+  const history = useHistory()
+  const [signup, { data }] = useMutation(SIGNUP_MUTATION)
+
+  const initialValues: SignupValues = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
   }
-  if (error) return <p>{error.message}</p>
+
+  const validationSchema = Yup.object({
+    name: Yup.string().max(15).required('Name is required'),
+    email: Yup.string().email('Invalid email address').required('Email is required'),
+    password: Yup.string().max(20).required('Password is required'),
+    confirmPassword: Yup.string().oneOf(
+      [Yup.ref('password'), null],
+      'Passwords do not match'
+    )
+  })
+
   return <>
     <h1>Sign Up</h1>
     <Formik
@@ -39,10 +60,11 @@ export default function SignUp() {
         <ErrorMessage name='name' component={'div'} />
         <Field name='email' type='text' placeholder='Email' />
         <ErrorMessage name='email' component={'div'} />
-        <Field name='password' type='text' placeholder='Password' />
+        <Field name='password' type='password' placeholder='Password' />
         <ErrorMessage name='password' component={'div'} />
-        <Field name='confirmPassword' type='text' placeholder='Confirm Password' />
+        <Field name='confirmPassword' type='password' placeholder='Confirm Password' />
         <ErrorMessage name='confirmPassword' component={'div'} />
+        <button type='submit'>Sign Up</button>
       </Form>
     </Formik>
   </>
