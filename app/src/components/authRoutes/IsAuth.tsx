@@ -9,8 +9,10 @@ const IS_LOGGED_IN = gql`
   }
 }
 `
-
-export default function IsAuth({ children }) {
+interface Props {
+  children?: React.ReactNode
+}
+export default function IsAuth({ children }: Props) {
   const { loading, error, data } = useQuery(IS_LOGGED_IN)
   if (loading) return <p>Loading...</p>
   if (error) return <p>{error.message}</p>
@@ -18,5 +20,7 @@ export default function IsAuth({ children }) {
   if (!data.me) {
     return <Redirect to={{ pathname: '/' }} />
   }
-  return children
+  return <>
+    {children}
+  </>
 }
