@@ -1,9 +1,9 @@
 import { gql, useMutation } from '@apollo/client';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react'
 import * as Yup from 'yup';
-
+import Logo from '../../assets/logo.png';
 
 const SIGNUP_MUTATION = gql`
   mutation signup($name: String, $email: String!, $password: String!){
@@ -41,6 +41,7 @@ export default function SignUp() {
   })
 
   return <div className='container'>
+    <img src={Logo} alt='logo' style={{ width: '50px' }} className='logo' />
     <h2>Sign Up</h2>
     <Formik
       initialValues={initialValues}
@@ -67,5 +68,11 @@ export default function SignUp() {
         <button type='submit' className='btn'>Sign Up</button>
       </Form>
     </Formik>
+    <div className="register">
+      <h3>
+        Already have an account?
+        <Link to='/login'> Login</Link>
+      </h3>
+    </div>
   </div>
 }
