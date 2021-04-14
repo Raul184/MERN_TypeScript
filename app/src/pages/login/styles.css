@@ -79,14 +79,19 @@ button:disabled {
 	opacity: 0.5;
 }
 a {
+  font-size: 18px;
 	text-decoration: none;
-	/* color: var(--main-color); */
+  color: #228dcf;
 }
 
+a:hover{
+  text-decoration: underline;
+}
 .login {
 	text-align: center;
 }
 
 .register {
 	text-align: center;
+  margin: 40px;
 }

@@ -63,7 +63,7 @@ export default function Login() {
     <div className="register">
       <h3>
         Don't have an account?
-        <Link to='/signup'>Sign Up</Link>
+        <Link to='/signup'> Sign Up</Link>
       </h3>
     </div>
   </div>

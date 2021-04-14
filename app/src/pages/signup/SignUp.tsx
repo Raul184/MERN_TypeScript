@@ -40,7 +40,7 @@ export default function SignUp() {
     )
   })
 
-  return <>
+  return <div className='container'>
     <h2>Sign Up</h2>
     <Formik
       initialValues={initialValues}
@@ -67,5 +67,5 @@ export default function SignUp() {
         <button type='submit' className='btn'>Sign Up</button>
       </Form>
     </Formik>
-  </>
+  </div>
 }
