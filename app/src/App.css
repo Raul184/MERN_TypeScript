@@ -3,3 +3,4 @@
   --btn-hover-color: #228dcf;
 }
 @import './pages/login/styles.css';
+@import './components/landing/styles.css';

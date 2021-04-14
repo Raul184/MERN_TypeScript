@@ -7,6 +7,7 @@ import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 import Users from './pages/users/users';
 import IsAuth from './components/authRoutes/IsAuth';
+import Landing from './components/landing/Landing';
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
 const authLink = setContext(
@@ -30,7 +31,8 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Switch>
-        <Route exact path='/' component={Home} />
+        <Route exact path='/' component={Landing} />
+        <Route exact path='/home' component={Home} />
         <Route exact path='/signup' component={SignUp} />
         <Route exact path='/login' component={Login} />
         <IsAuth>
