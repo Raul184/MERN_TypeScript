@@ -41,7 +41,7 @@ export default function SignUp() {
   })
 
   return <>
-    <h1>Sign Up</h1>
+    <h2>Sign Up</h2>
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
@@ -64,7 +64,7 @@ export default function SignUp() {
         <ErrorMessage name='password' component={'div'} />
         <Field name='confirmPassword' type='password' placeholder='Confirm Password' />
         <ErrorMessage name='confirmPassword' component={'div'} />
-        <button type='submit'>Sign Up</button>
+        <button type='submit' className='btn'>Sign Up</button>
       </Form>
     </Formik>
   </>

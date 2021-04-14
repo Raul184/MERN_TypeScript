@@ -2,11 +2,10 @@ import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/c
 import React from 'react';
 import { setContext } from 'apollo-link-context';
 import { Switch, Route } from 'react-router-dom';
-import './App.css';
-import Home from './pages/Home';
-import SignUp from './pages/SignUp';
-import Login from './pages/Login';
-import Users from './components/users';
+import Home from './pages/home/Home';
+import SignUp from './pages/signup/SignUp';
+import Login from './pages/login/Login';
+import Users from './pages/users/users';
 import IsAuth from './components/authRoutes/IsAuth';
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000' })

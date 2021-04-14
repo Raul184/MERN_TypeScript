@@ -1,9 +1,10 @@
 import { gql, useMutation } from '@apollo/client';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react'
 import * as Yup from 'yup';
-
+import Logo from '../../assets/logo.png';
+import './styles.css';
 
 const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password: String!){
@@ -31,8 +32,9 @@ export default function Login() {
     password: Yup.string().max(20).required('Password is required')
   })
 
-  return <>
-    <h1>Login</h1>
+  return <div className='container'>
+    <img src={Logo} alt='logo' style={{ width: '50px' }} className='logo' />
+    <h2>Login</h2>
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
@@ -53,8 +55,16 @@ export default function Login() {
         <Field name='password' type='password' placeholder='Password' />
         <ErrorMessage name='password' component={'div'} />
 
-        <button type='submit'>Login</button>
+        <button type='submit' className='btn'>
+          <span>Login</span>
+        </button>
       </Form>
     </Formik>
-  </>
+    <div className="register">
+      <h3>
+        Don't have an account?
+        <Link to='/signup'>Sign Up</Link>
+      </h3>
+    </div>
+  </div>
 }
