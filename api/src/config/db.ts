@@ -6,6 +6,7 @@ dotenv.config({ path: path.join(__dirname, './config.env') });
 
 const connectDB = async () => {
   const uri: any = process.env.DATABASE
+  console.log(process.env.DATABASE);
   try {
     await mongoose.connect(
       uri, {
