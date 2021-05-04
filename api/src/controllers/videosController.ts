@@ -35,8 +35,9 @@ export const createVideo: RequestHandler = async (req, res) => {
   return res.json(vSaved)
 }
 
-export const updateVideo: RequestHandler = (req, res) => {
-  return res.json('Getting videos')
+export const updateVideo: RequestHandler = async (req, res) => {
+  const update = await Video.findByIdAndUpdate(req.params.id, req.body)
+  return res.status(202).json(update)
 }
 
 export const deleteVideo: RequestHandler = async (req, res) => {
