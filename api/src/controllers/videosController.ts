@@ -15,11 +15,12 @@ export const getVideos: RequestHandler = async (req, res) => {
 export const getVideo: RequestHandler = async (req, res) => {
   try {
     const video = await Video.findById(req.params.id)
-    if (video) return res.status(200).json(video)
+    if (!video) return res.status(204).json()
+    return res.status(200).json(video)
+
   }
   catch (err) {
     return res.json(err.message)
-
   }
 }
 
@@ -38,6 +39,16 @@ export const updateVideo: RequestHandler = (req, res) => {
   return res.json('Getting videos')
 }
 
-export const deleteVideo: RequestHandler = (req, res) => {
-  return res.json('Getting videos')
+export const deleteVideo: RequestHandler = async (req, res) => {
+  try {
+    console.log('ID', req.params.id);
+    const deleted = await Video.findByIdAndDelete(req.params.id)
+    if (!deleted) return res.status(204).json()
+    return res.status(202).json({
+      msg: "Video successfully deleted"
+    })
+  }
+  catch (err) {
+    return res.json(err.message)
+  }
 }
