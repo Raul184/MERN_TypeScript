@@ -32,6 +32,12 @@ const VideoForm = () => {
                   className="form-control"
                 />
               </div>
+              <button 
+                className="btn btn-primary center"
+                style={{marginLeft: '10px'}}
+              >
+                Create Video
+              </button>
             </form>
           </div>
         </div>
