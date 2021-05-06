@@ -1,6 +1,21 @@
-import React from 'react'
+import React, {ChangeEvent, useState} from 'react'
+import {Video} from '../videoList/interface'
+
+type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 
 const VideoForm = () => {
+  const [video, setVideo] = useState<Video>({
+    title: "",
+    description: "",
+    url: ""
+  })
+
+  const handleChange = (e:InputChange) => {
+    setVideo({
+      ...video,
+      [e.target.name]: e.target.value
+    })
+  } 
   return (
     <div className="row">
       <div className="col-md-4 offset-md-4">
@@ -10,6 +25,7 @@ const VideoForm = () => {
             <form action="">
               <div style={{margin: '20px 10px'}}>
                 <input
+                  onChange={handleChange}
                   type="text"
                   name="title"
                   placeholder="Please input a title"
@@ -19,6 +35,7 @@ const VideoForm = () => {
               </div>
               <div style={{margin: '20px 10px'}}>
                 <input
+                  onChange={handleChange}
                   type="text"
                   name="url"
                   placeholder="...someWeb.com"
@@ -27,6 +44,7 @@ const VideoForm = () => {
               </div>
               <div style={{margin: '20px 10px'}}>
                 <textarea
+                  onChange={handleChange}
                   name="Description"
                   rows={3}
                   className="form-control"
