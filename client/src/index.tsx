@@ -11,13 +11,14 @@ import Nav from './components/nav/Nav';
 
 render(
   <React.StrictMode>
-    <h1>Hi</h1>
     <Router>
       <Nav />
-      <Switch>
-        <Route exact path='/' component={VideoList} />
-        <Route path='/new' component={VideoForm} />
-      </Switch>
+      <div className="container">
+        <Switch>
+          <Route exact path='/' component={VideoList} />
+          <Route path='/new' component={VideoForm} />
+        </Switch>
+      </div>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
