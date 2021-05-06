@@ -1,5 +1,5 @@
 import React from 'react'
-import { Video } from '../videoList/interface'
+import { Video } from '../Interface/interface'
 
 interface Props {
   video: Video

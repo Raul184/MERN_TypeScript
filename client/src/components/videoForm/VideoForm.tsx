@@ -1,20 +1,34 @@
 import React, {ChangeEvent, useState} from 'react'
-import {Video} from '../videoList/interface'
+import { FormEvent } from 'react'
+import {Video} from '../Interface/interface'
+import {toast} from 'react-toastify'
+import * as videoService from '../services/Video.services'
+import {useHistory} from 'react-router-dom'
 
 type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 
 const VideoForm = () => {
-  const [video, setVideo] = useState<Video>({
+  const initState =  {
     title: "",
-    description: "",
-    url: ""
-  })
+    url: "",
+    description: ""
+  }
+  const history = useHistory()
+  const [video, setVideo] = useState<Video>(initState)
 
   const handleChange = (e:InputChange) => {
     setVideo({
       ...video,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    await videoService.createVideo(video)
+    toast.success('New video added')
+    setVideo(initState)
+    history.push('/')    
   } 
   return (
     <div className="row">
@@ -22,12 +36,13 @@ const VideoForm = () => {
         <div className="card">
           <div className="card-body">
             <h3>New Video</h3>
-            <form action="">
+            <form onSubmit={handleSubmit}>
               <div style={{margin: '20px 10px'}}>
                 <input
                   onChange={handleChange}
                   type="text"
                   name="title"
+                  value={video.title}
                   placeholder="Please input a title"
                   className="form-control"
                   autoFocus
@@ -38,6 +53,7 @@ const VideoForm = () => {
                   onChange={handleChange}
                   type="text"
                   name="url"
+                  value={video.url}
                   placeholder="...someWeb.com"
                   className="form-control"
                 />
@@ -48,7 +64,7 @@ const VideoForm = () => {
                   name="Description"
                   rows={3}
                   className="form-control"
-                />
+                ></textarea>
               </div>
               <button 
                 className="btn btn-primary center"

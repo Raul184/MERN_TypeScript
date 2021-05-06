@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import VideoItem from '../videoItem/VideoItem'
-import { Video } from './interface'
-import * as videoService from './Video.services'
+import { Video } from '../Interface/interface'
+import * as videoService from '../services/Video.services'
 
 const VideoList = () => {
   const [videos, setVideos] = useState<Video[]>([])
