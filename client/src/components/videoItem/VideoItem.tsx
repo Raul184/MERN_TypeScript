@@ -1,8 +1,8 @@
 import React from 'react'
-import { Video } from '../Interface/interface'
 import ReactPlayer from 'react-player'
 import {useHistory} from 'react-router-dom'
 import * as videoService from '../services/Video.services'
+import { Video } from '../Interface/interface'
 import '../styles/styles.css'
 
 interface Props {
