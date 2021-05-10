@@ -11,7 +11,6 @@ const VideoList = () => {
 
   const loadVideos = async () => {
     const res = await videoService.getVideos()
-    console.log('RES', res);
     // Displayed by date
     const orderedVideos = res.map((v:any) => {
       return {
@@ -31,7 +30,7 @@ const VideoList = () => {
   return (
     <div className="row">
       { videos.map(v => {
-        return <VideoItem key={v._id} video={v} />
+        return <VideoItem key={v._id} video={v} loadVideos={loadVideos}/>
       })}
     </div>
   )

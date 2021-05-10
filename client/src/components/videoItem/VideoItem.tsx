@@ -6,13 +6,15 @@ import * as videoService from '../services/Video.services'
 import '../styles/styles.css'
 
 interface Props {
-  video: Video
+  video: Video,
+  loadVideos: () => void;
 }
-const VideoItem = ({ video }: Props) => {
+const VideoItem = ({ video, loadVideos }: Props) => {
   const history = useHistory()
 
   const handleDelete = async (id:string) => {
     await videoService.deleteVideo(id)
+    loadVideos()
   }
   return (
     <div className="col-md-4">
