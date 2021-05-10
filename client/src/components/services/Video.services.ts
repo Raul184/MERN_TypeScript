@@ -49,3 +49,10 @@ export const updateVideo = async (id:string, video: Video) => {
     })
   })
 }
+
+// DELETE A NEW VIDEO 
+export const deleteVideo = async (id:string) => {
+  await fetch(`http://localhost:4000/videos/${id}`, {
+    method: "delete"
+  })
+}
