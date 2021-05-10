@@ -11,7 +11,21 @@ const VideoList = () => {
 
   const loadVideos = async () => {
     const res = await videoService.getVideos()
-    setVideos(res)
+    console.log('RES', res);
+    // Displayed by date
+    const orderedVideos = res.map((v:any) => {
+      return {
+        ...v,
+        createdAt: v.createdAt ? new Date(v.createdAt): new Date(),
+        updatedAt: v.updatedAt ? new Date(v.updatedAt): new Date(),
+      }   //eslint-disable-next-line
+    })
+    .sort((
+      a: { createdAt: { getTime: () => number } },
+      b: { createdAt: { getTime: () => number } }) => 
+      b.createdAt.getTime() - a.createdAt.getTime()
+    )
+    setVideos(orderedVideos)
   }
 
   return (
