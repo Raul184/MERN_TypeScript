@@ -1,6 +1,7 @@
 import React from 'react'
 import { Video } from '../Interface/interface'
 import ReactPlayer from 'react-player'
+import '../styles/styles.css'
 
 interface Props {
   video: Video
@@ -8,7 +9,7 @@ interface Props {
 const VideoItem = ({ video }: Props) => {
   return (
     <div className="col-md-4">
-      <div className="card card-body">
+      <div className="card card-body video-card">
         <div className="d-flex justify-content-between">
           <h1>{video.title}</h1>
           <span className="text-danger">X</span>
