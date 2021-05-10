@@ -6,3 +6,7 @@ export interface Video {
   createdAt?: string;
   _id?: string
 }
+
+export interface Params {
+  id: string;
+}

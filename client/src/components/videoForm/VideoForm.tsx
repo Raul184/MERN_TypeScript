@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from 'react'
 import { FormEvent } from 'react'
-import {Video} from '../Interface/interface'
+import {Params, Video} from '../Interface/interface'
 import {toast} from 'react-toastify'
 import * as videoService from '../services/Video.services'
 import {useHistory, useParams} from 'react-router-dom'
@@ -14,9 +14,9 @@ const VideoForm = () => {
     description: ""
   }
   const history = useHistory()
-  const params = useParams()
+  const params = useParams<Params>()
   console.log(params)
-  
+
   const [video, setVideo] = useState<Video>(initState)
 
   const handleChange = (e:InputChange) => {
@@ -33,6 +33,19 @@ const VideoForm = () => {
     setVideo(initState)
     history.push('/')    
   } 
+  const btn = params.id ? <button 
+    className="btn btn-info center"
+    style={{marginLeft: '10px'}}
+  >
+    Update Video
+  </button>:
+  <button 
+    className="btn btn-primary center"
+    style={{marginLeft: '10px'}}
+  >
+    Create Video
+  </button>
+  
   return (
     <div className="row">
       <div className="col-md-4 offset-md-4">
@@ -69,12 +82,7 @@ const VideoForm = () => {
                   className="form-control"
                 ></textarea>
               </div>
-              <button 
-                className="btn btn-primary center"
-                style={{marginLeft: '10px'}}
-              >
-                Create Video
-              </button>
+              {btn}
             </form>
           </div>
         </div>
