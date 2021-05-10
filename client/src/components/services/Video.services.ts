@@ -7,6 +7,13 @@ export const getVideos = async () => {
   return json
 }
 
+// GET A VIDEO from DB
+export const getVideo = async (id:string) => {
+  const video = await fetch(`http://localhost:4000/videos/${id}`)
+  const json = await video.json()
+  return json
+}
+
 // POST A NEW VIDEO 
 export const createVideo = async (video: Video) => {
   const {title, url, description} = video

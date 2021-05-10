@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react'
+import React, {ChangeEvent, useState, useEffect} from 'react'
 import { FormEvent } from 'react'
 import {Params, Video} from '../Interface/interface'
 import {toast} from 'react-toastify'
@@ -13,11 +13,21 @@ const VideoForm = () => {
     url: "",
     description: ""
   }
+  const [video, setVideo] = useState<Video>(initState)
   const history = useHistory()
   const params = useParams<Params>()
-  console.log(params)
 
-  const [video, setVideo] = useState<Video>(initState)
+  const getVideo = async (id:string) => {
+    const res = await videoService.getVideo(id)
+    const {title, description, url } = res
+    setVideo({title, description, url})
+  }
+
+  useEffect(() => {
+    if(params.id){
+      getVideo(params.id)
+    }
+  }, [params.id])
 
   const handleChange = (e:InputChange) => {
     setVideo({
@@ -33,17 +43,11 @@ const VideoForm = () => {
     setVideo(initState)
     history.push('/')    
   } 
-  const btn = params.id ? <button 
-    className="btn btn-info center"
+  const btn = <button 
+    className={`${params.id ? 'btn btn-info center' : 'btn btn-primary center'}`}
     style={{marginLeft: '10px'}}
   >
-    Update Video
-  </button>:
-  <button 
-    className="btn btn-primary center"
-    style={{marginLeft: '10px'}}
-  >
-    Create Video
+    {params.id ? 'Update Video' : 'Create Video'}
   </button>
   
   return (
