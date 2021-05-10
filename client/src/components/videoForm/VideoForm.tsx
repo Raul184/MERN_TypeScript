@@ -3,7 +3,7 @@ import { FormEvent } from 'react'
 import {Video} from '../Interface/interface'
 import {toast} from 'react-toastify'
 import * as videoService from '../services/Video.services'
-import {useHistory} from 'react-router-dom'
+import {useHistory, useParams} from 'react-router-dom'
 
 type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 
@@ -14,6 +14,9 @@ const VideoForm = () => {
     description: ""
   }
   const history = useHistory()
+  const params = useParams()
+  console.log(params)
+  
   const [video, setVideo] = useState<Video>(initState)
 
   const handleChange = (e:InputChange) => {
