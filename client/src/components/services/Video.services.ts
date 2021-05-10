@@ -31,3 +31,21 @@ export const createVideo = async (video: Video) => {
     })
   })
 }
+
+// UPDATE A NEW VIDEO 
+export const updateVideo = async (id:string, video: Video) => {
+  const {title, url, description} = video
+  
+  await fetch(`http://localhost:4000/videos/${id}`, {
+    method: "put",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title,
+      url,
+      description 
+    })
+  })
+}

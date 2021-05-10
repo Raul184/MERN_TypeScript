@@ -38,11 +38,20 @@ const VideoForm = () => {
 
   const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await videoService.createVideo(video)
-    toast.success('New video added')
-    setVideo(initState)
+    if(!params.id){
+      await videoService.createVideo(video)
+      toast.success('New video added')
+      setVideo(initState)
+    }
+    else{
+      console.log('UPDATING');
+      await videoService.updateVideo(params.id, video)
+      toast.success('Updated video')
+      setVideo(initState)
+    }
     history.push('/')    
   } 
+
   const btn = <button 
     className={`${params.id ? 'btn btn-info center' : 'btn btn-primary center'}`}
     style={{marginLeft: '10px'}}
